@@ -14,7 +14,8 @@ app.add_middleware(
 )
 
 model = tf.keras.Sequential([
-  tf.keras.layers.Dense(16, activation='relu', input_shape=(3,)),
+  tf.keras.Input(shape=(3,)),
+  tf.keras.layers.Dense(16, activation='relu'),
   tf.keras.layers.Dense(4, activation='sigmoid'),
 ])
 
