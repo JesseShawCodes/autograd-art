@@ -2,3 +2,7 @@ fastapi
 uvicorn
 tensorflow
 pydantic
+pytest
+pytest-asyncio
+pytest-cov
+httpx
