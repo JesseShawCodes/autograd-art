@@ -27,7 +27,7 @@ class AudioFeatures(BaseModel):
 
 @app.post("/predict")
 def predict(features: AudioFeatures):
-  print("-------hello.......")
+
   x = tf.convert_to_tensor([[features.bass, features.mid, features.treble]], dtype=tf.float32)
 
   with tf.GradientTape() as tape:
