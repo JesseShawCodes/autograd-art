@@ -27,15 +27,32 @@ export default function Home() {
         p.setup = () => {
           p.createCanvas(window.innerWidth, window.innerHeight);
           p.noStroke();
-          intervalId = setInterval(fetchPrediction, 1000);
+          // intervalId = setInterval(fetchPrediction, 1000);
         };
 
         p.draw = () => {
-          p.background(0, 20);
-          p.fill(...color);
-          p.ellipse(p.width / 2, p.height / 2, radius);
-        };
+          p.background(0, 0, 0, 0);
+          p.fill(20, 0, 0);
+          // p.square(p.width / 2, p.height / 2, radius);
 
+          p.noStroke();
+          // let spacing = Math.floor(Math.random() * (300 - 30 + 1)) + 30;
+          let spacing = 10;
+          for (let x = spacing / 2; x < p.width; x += spacing) {
+            for (let y = spacing / 2; y < p.height; y += spacing) {
+              p.ellipse(x, y, 2, 2)
+            }
+          }
+
+
+          p.noLoop();
+          /*
+          for (let i = 0; i < 50; i++) {
+            p.fill(random()*255, random()*255, random()*255)
+            p.square(100,100,40)
+          }
+          */
+        };
         const fetchPrediction = async () => {
           const audio = {
             bass: Math.random(),
@@ -50,8 +67,6 @@ export default function Home() {
               body: JSON.stringify(audio)
             })
 
-            console.log(res);
-
             if (!res.ok) {
               throw new Error(`HTTP error! Status: ${res.status}`);
             };
@@ -59,7 +74,6 @@ export default function Home() {
             const data = await res.json();
             radius = data.radius;
             color = data.color;
-            console.log(data);
 
           } catch (err) {
             console.error(err);
@@ -83,7 +97,7 @@ export default function Home() {
   return (
     <div className="d-flex flex-column min-vh-100">
       <NavBar />
-      <main className="flex-grow-1">
+      <main className="flex-grow-1 bg-my-gradient">
         {hasError ? (
           <div>
             <Alert alertType={'danger'} />
